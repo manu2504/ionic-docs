@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import CodeBlock from '@theme/CodeBlock';
+
 import './playground.css';
 
 enum Mode {
@@ -9,6 +11,7 @@ enum Mode {
 
 export default function Playground() {
   const [mode, setMode] = useState(Mode.iOS);
+  const [expanded, setExpanded] = useState(false);
 
   // TODO FW-741: Load code snippets remotely
 
@@ -38,7 +41,23 @@ export default function Playground() {
             </button>
           </div>
           <div className="playground__control-group playground__control-group--end">
-            {/* TODO FW-737: Toggle/Collapse Button */}
+            <button
+              className="playground__icon-button"
+              aria-label={expanded ? 'Hide source code' : 'Show full source'}
+              onClick={() => setExpanded(!expanded)}
+            >
+              <svg
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path d="M9 16L5 12L9 8" stroke="current" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M15 16L19 12L15 8" stroke="current" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
             {/* TODO FW-738: Report an Issue Button */}
             <a
               className="playground__icon-button"
@@ -61,7 +80,13 @@ export default function Playground() {
         </div>
         <div className="playground__preview">{/* TODO FW-743: iframe Preview */}</div>
       </div>
-      <div className="playground__code-block">{/* TODO FW-744: Code blocks per language */}</div>
+      <div
+        className={'playground__code-block ' + (expanded ? 'playground__code-block--expanded' : '')}
+        aria-expanded={expanded ? 'true' : 'false'}
+      >
+        {/* TODO FW-744: Code blocks per language */}
+        <CodeBlock>Fake code block</CodeBlock>
+      </div>
     </div>
   );
 }
