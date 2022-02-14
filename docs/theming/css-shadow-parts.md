@@ -27,7 +27,7 @@ However, due to this encapsulation, styles aren’t able to bleed into inner ele
 ```html
 <ion-select>
   #shadow-root
-  <div class="select-text select-placeholder”></div>
+  <div class="select-text select-placeholder"></div>
   <div class="select-icon"></div>
 </ion-select>
 ```
